@@ -103,3 +103,7 @@ while True:
         print()
         print("Elección invalida, pruebe otra vez")
         print()
+
+#agregar una nueva habitación
+
+
