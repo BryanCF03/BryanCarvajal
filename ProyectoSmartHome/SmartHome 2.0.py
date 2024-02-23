@@ -57,6 +57,7 @@ while True:
                                 print("Menu de Habitaciones:")
                                 print()
                                 print(f"1.{H1}\n2.Registrar una Nueva Habitación.")
+                                #Agregar mas Habitaciones
 
                             elif eleción == 2:
                                 print()
