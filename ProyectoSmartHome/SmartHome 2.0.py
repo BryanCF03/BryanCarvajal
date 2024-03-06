@@ -1,4 +1,5 @@
 cerrarApp = 0
+#Estas Variables solo sirven para guardar datos
 h1 = "Habitación 1"
 Disp1h1 = "Dispositivo 1"
 Disp2h1 = "Dispositivo 2"
@@ -75,188 +76,214 @@ while True:
                                 print()
                                 if elección == 1: #Menu de Habitaciones
                                     while True:
-                                            print("=========================================")
-                                            print("Menu de habitaciones")
-                                            print()
-                                            print(f"1.{h1}\n2.{h2}\n3.{h3}\n4.{h4}\n5.{h5}\n\n6.Salir del Menu de habitaciones")
-                                            print()
-                                            eleccion = int(input("Digite su elección:"))
-                                            print()
+                                        print("=========================================")
+                                        print("Menu de habitaciones")
+                                        print()
+                                        print(f"1.{h1}\n2.{h2}\n3.{h3}\n4.{h4}\n5.{h5}\n\n6.Salir del Menu de habitaciones")
+                                        print()
+                                        eleccion = int(input("Digite su elección:"))
+                                        print()
 
-                                            if eleccion == 1:
-                                                    while True:
-                                                            print("Estás en",h1)
-                                                            print()
-                                                            print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h1}\n3.Salir de {h1}")
-                                                            print()
-                                                            eleccionHab = int(input("Digite su elección: "))
-                                                    
-                                                            if eleccionHab == 1:
-                                                                
-                                                                    while True:
-                                                                            print("Menu de Dispositivos")
-                                                                            print()
-                                                                            print(f"1.{Disp1h1}\n2.{Disp2h1}\n3.{Disp3h1}\n4.{Disp4h1}\n5.Salir del menú de dispositivos")
-                                                                            print()
-                                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                            
-                                                            elif eleccionHab == 2:
-                                                                    h1=input("Digite el nuevo nombre para esta Habitación: ")
-                                                                    print()
-                                                                    print("Cambiaste el nombre de esta habitación")
-                                                                    print()
-                                                                
-                                                            elif eleccionHab == 3:
-                                                                    print()
-                                                                    print("Saliste de",h1)
-                                                                    print()
-                                                                    break
-                                                                
-                                                            else:
-                                                                    print()
-                                                                    print("Elección Invalida, Pruebe otra vez")
-                                                                    print()
-
-                                            if eleccion == 2:
-                                                    while True:
-                                                            print("Estás en",h2)
-                                                            print()
-                                                            print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h2}\n3.Salir de {h2}")
-                                                            print()
-                                                            eleccionHab = int(input("Digite su elección: "))
-                                                    
-                                                            if eleccionHab == 1:
-                                                                
-                                                                    while True:
-                                                                            print("Menu de Dispositivos")
-                                                                            print()
-                                                                            print(f"1.{Disp1h2}\n2.{Disp2h2}\n3.{Disp3h2}\n4.{Disp4h2}\n5.Salir del menú de dispositivos")
-                                                                            print()
-                                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                            
-                                                            elif eleccionHab == 2:
-                                                                    h2=input("Digite el nuevo nombre para esta Habitación: ")
-                                                                    print()
-                                                                    print("Cambiaste el nombre de esta habitación")
-                                                                    print()
-                                                                
-                                                            elif eleccionHab == 3:
-                                                                    print()
-                                                                    print("Saliste de",h2)
-                                                                    print()
-                                                                    break
-                                                                
-                                                            else:
-                                                                    print()
-                                                                    print("Elección Invalida, Pruebe otra vez")
-                                                                    print()
-                                                 
-                                            if eleccion == 3:
-                                                    while True:
-                                                            print("Estás en",h3)
-                                                            print()
-                                                            print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h3}\n3.Salir de {h3}")
-                                                            print()
-                                                            eleccionHab = int(input("Digite su elección: "))
-                                                    
-                                                            if eleccionHab == 1:
-                                                                
-                                                                    while True:
-                                                                            print("Menu de Dispositivos")
-                                                                            print()
-                                                                            print(f"1.{Disp1h3}\n2.{Disp2h3}\n3.{Disp3h3}\n4.{Disp4h3}\n5.Salir del menú de dispositivos")
-                                                                            print()
-                                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                            
-                                                            elif eleccionHab == 2:
-                                                                    h3=input("Digite el nuevo nombre para esta Habitación: ")
-                                                                    print()
-                                                                    print("Cambiaste el nombre de esta habitación")
-                                                                    print()
-                                                                
-                                                            elif eleccionHab == 3:
-                                                                    print()
-                                                                    print("Saliste de",h3)
-                                                                    print()
-                                                                    break
-                                                                
-                                                            else:
-                                                                    print()
-                                                                    print("Elección Invalida, Pruebe otra vez")
-                                                                    print()
-                                            if eleccion == 4:
-                                                    while True:
-                                                            print("Estás en",h4)
-                                                            print()
-                                                            print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h4}\n3.Salir de {h4}")
-                                                            print()
-                                                            eleccionHab = int(input("Digite su elección: "))
-                                                    
-                                                            if eleccionHab == 1:
-                                                                
-                                                                    while True:
-                                                                            print("Menu de Dispositivos")
-                                                                            print()
-                                                                            print(f"1.{Disp1h4}\n2.{Disp2h4}\n3.{Disp3h4}\n4.{Disp4h4}\n5.Salir del menú de dispositivos")
-                                                                            print()
-                                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                            
-                                                            elif eleccionHab == 2:
-                                                                    h4=input("Digite el nuevo nombre para esta Habitación: ")
-                                                                    print()
-                                                                    print("Cambiaste el nombre de esta habitación")
-                                                                    print()
-                                                                
-                                                            elif eleccionHab == 3:
-                                                                    print()
-                                                                    print("Saliste de",h4)
-                                                                    print()
-                                                                    break
-                                                                
-                                                            else:
-                                                                    print()
-                                                                    print("Elección Invalida, Pruebe otra vez")
-                                                                    print()
-                                            if eleccion == 5:
-                                                    while True:
-                                                            print("Estás en",h5)
-                                                            print()
-                                                            print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h5}\n3.Salir de {h5}")
-                                                            print()
-                                                            eleccionHab = int(input("Digite su elección: "))
-                                                    
-                                                            if eleccionHab == 1:
-                                                                
-                                                                    while True:
-                                                                            print("Menu de Dispositivos")
-                                                                            print()
-                                                                            print(f"1.{Disp1h5}\n2.{Disp2h5}\n3.{Disp3h5}\n4.{Disp4h5}\n5.Salir del menú de dispositivos")
-                                                                            print()
-                                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                            
-                                                            elif eleccionHab == 2:
-                                                                    h5=input("Digite el nuevo nombre para esta Habitación: ")
-                                                                    print()
-                                                                    print("Cambiaste el nombre de esta habitación")
-                                                                    print()
-                                                                
-                                                            elif eleccionHab == 3:
-                                                                    print
-                                                                    print("Saliste de",h5)
-                                                                    print()
-                                                                    break
-                                                                
-                                                            else:
-                                                                    print()
-                                                                    print("Elección Invalida, Pruebe otra vez")
-                                                                    print()
-
-
-                                            elif eleccion == 6:
+                                        if eleccion == 1:
+                                                while True:
+                                                    print("Estás en",h1)
                                                     print()
-                                                    print("Has salido de el Menu de Habitaciones")
+                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h1}\n3.Salir de {h1}")
                                                     print()
-                                                    break
+                                                    eleccionHab = int(input("Digite su elección: "))
+                                                
+                                                    if eleccionHab == 1:
+                                                        while True:
+                                                            print("Menu de Dispositivos")
+                                                            print()
+                                                            print(f"1.{Disp1h1}\n2.{Disp2h1}\n3.{Disp3h1}\n4.{Disp4h1}\n5.Salir del menú de dispositivos")
+                                                            print()
+                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
+                                                    
+                                                    elif eleccionHab == 2:
+                                                        while True:
+                                                            h1=input("Digite el nuevo nombre para esta Habitación: ")
+                                                            print()
+                                                            if h1 == h2 or h1 == h3 or h1 == h4 or h1 == h5:
+                                                                print("El nombre ya existe, Pruebe con otro")
+                                                                print
+                                                            else:
+                                                                print("Cambiaste el nombre de esta habitación")
+                                                                print()
+                                                                break
+                                                        
+                                                    elif eleccionHab == 3:
+                                                        print()
+                                                        print("Saliste de",h1)
+                                                        print()
+                                                        break
+                                                        
+                                                    else:
+                                                        print()
+                                                        print("Elección Invalida, Pruebe otra vez")
+                                                        print()
+
+                                        if eleccion == 2:
+                                            while True:
+                                                    print("Estás en",h2)
+                                                    print()
+                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h2}\n3.Salir de {h2}")
+                                                    print()
+                                                    eleccionHab = int(input("Digite su elección: "))
+                                                
+                                                    if eleccionHab == 1:
+                                                        while True:
+                                                            print("Menu de Dispositivos")
+                                                            print()
+                                                            print(f"1.{Disp1h2}\n2.{Disp2h2}\n3.{Disp3h2}\n4.{Disp4h2}\n5.Salir del menú de dispositivos")
+                                                            print()
+                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
+                                                    
+                                                    elif eleccionHab == 2:
+                                                        while True:
+                                                            h2=input("Digite el nuevo nombre para esta Habitación: ")
+                                                            print()
+                                                            if h2 == h1 or h2 == h3 or h2 == h4 or h2 == h5:
+                                                                print("El nombre ya existe, Pruebe con otro")
+                                                                print
+                                                            else:
+                                                                print("Cambiaste el nombre de esta habitación")
+                                                                print()
+                                                                break
+                                                        
+                                                    elif eleccionHab == 3:
+                                                        print()
+                                                        print("Saliste de",h2)
+                                                        print()
+                                                        break
+                                                        
+                                                    else:
+                                                        print()
+                                                        print("Elección Invalida, Pruebe otra vez")
+                                                        print()
+                                               
+                                        if eleccion == 3:
+                                                while True:
+                                                    print("Estás en",h3)
+                                                    print()
+                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h3}\n3.Salir de {h3}")
+                                                    print()
+                                                    eleccionHab = int(input("Digite su elección: "))
+                                                
+                                                    if eleccionHab == 1:
+                                                        while True:
+                                                            print("Menu de Dispositivos")
+                                                            print()
+                                                            print(f"1.{Disp1h3}\n2.{Disp2h3}\n3.{Disp3h3}\n4.{Disp4h3}\n5.Salir del menú de dispositivos")
+                                                            print()
+                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
+                                                    
+                                                    elif eleccionHab == 2:
+                                                        while True:
+                                                            h3=input("Digite el nuevo nombre para esta Habitación: ")
+                                                            print()
+                                                            if h3 == h2 or h3 == h1 or h3 == h4 or h3 == h5:
+                                                                print("El nombre ya existe, Pruebe con otro")
+                                                                print
+                                                            else:
+                                                                print("Cambiaste el nombre de esta habitación")
+                                                                print()
+                                                                break
+                                                        
+                                                    elif eleccionHab == 3:
+                                                        print()
+                                                        print("Saliste de",h3)
+                                                        print()
+                                                        break
+                                                        
+                                                    else:
+                                                        print()
+                                                        print("Elección Invalida, Pruebe otra vez")
+                                                        print()
+                                                        
+                                        if eleccion == 4:
+                                            while True:
+                                                    print("Estás en",h4)
+                                                    print()
+                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h4}\n3.Salir de {h4}")
+                                                    print()
+                                                    eleccionHab = int(input("Digite su elección: "))
+                                                
+                                                    if eleccionHab == 1:
+                                                        while True:
+                                                            print("Menu de Dispositivos")
+                                                            print()
+                                                            print(f"1.{Disp1h4}\n2.{Disp2h4}\n3.{Disp3h4}\n4.{Disp4h4}\n5.Salir del menú de dispositivos")
+                                                            print()
+                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
+                                                    
+                                                    elif eleccionHab == 2:
+                                                        while True:
+                                                            h4=input("Digite el nuevo nombre para esta Habitación: ")
+                                                            print()
+                                                            if h4 == h2 or h4 == h3 or h4 == h1 or h4 == h5:
+                                                                print("El nombre ya existe, Pruebe con otro")
+                                                                print
+                                                            else:
+                                                                print("Cambiaste el nombre de esta habitación")
+                                                                print()
+                                                                break
+                                                        
+                                                    elif eleccionHab == 3:
+                                                        print()
+                                                        print("Saliste de",h4)
+                                                        print()
+                                                        break
+                                                        
+                                                    else:
+                                                        print()
+                                                        print("Elección Invalida, Pruebe otra vez")
+                                                        print()
+                                                        
+                                        if eleccion == 5:
+                                            while True:
+                                                    print("Estás en",h5)
+                                                    print()
+                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h5}\n3.Salir de {h5}")
+                                                    print()
+                                                    eleccionHab = int(input("Digite su elección: "))
+                                                
+                                                    if eleccionHab == 1:
+                                                        while True:
+                                                            print("Menu de Dispositivos")
+                                                            print()
+                                                            print(f"1.{Disp1h5}\n2.{Disp2h5}\n3.{Disp3h5}\n4.{Disp4h5}\n5.Salir del menú de dispositivos")
+                                                            print()
+                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
+                                                    
+                                                    elif eleccionHab == 2:
+                                                        while True:
+                                                            h5=input("Digite el nuevo nombre para esta Habitación: ")
+                                                            print()
+                                                            if h5 == h2 or h5 == h3 or h5 == h4 or h5 == h1:
+                                                                print("El nombre ya existe, Pruebe con otro")
+                                                                print
+                                                            else:
+                                                                print("Cambiaste el nombre de esta habitación")
+                                                                print()
+                                                                break
+                                                        
+                                                    elif eleccionHab == 3:
+                                                        print()
+                                                        print("Saliste de",h5)
+                                                        print()
+                                                        break
+                                                        
+                                                    else:
+                                                        print()
+                                                        print("Elección Invalida, Pruebe otra vez")
+                                                        print()
+                                                        
+                                        elif eleccion == 6:
+                                            print()
+                                            print("Has salido de el Menu de Habitaciones")
+                                            print()
+                                            break
 
             
                                        
