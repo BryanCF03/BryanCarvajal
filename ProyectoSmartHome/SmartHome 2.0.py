@@ -330,3 +330,4 @@ while True:
             print()
             print("Elección invalida, pruebe otra vez")
             print()
+            break
