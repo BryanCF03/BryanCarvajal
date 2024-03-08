@@ -1,4 +1,18 @@
 cerrarApp = 0
+salirBlucle = 0
+def compararNombres():
+    while True:
+        if h1 == h2 or h1 == h3 or h1 == h4 or h1 == h5 or h2 == h3 or h2 == h4 or h2 == h5 or h3 == h4 or h3 == h5 or h4 == h5:
+            print("El nombre ya existe, Pruebe con otro")
+            print()
+            break
+        else:
+            global salirBlucle
+            print("Cambiaste el nombre de la habitacion")
+            print()
+            salirBlucle += 1
+            break
+            
 #Estas Variables solo sirven para guardar datos
 h1 = "Habitación 1"
 Disp1h1 = "Dispositivo 1"
@@ -104,12 +118,9 @@ while True:
                                                         while True:
                                                             h1=input("Digite el nuevo nombre para esta Habitación: ")
                                                             print()
-                                                            if h1 == h2 or h1 == h3 or h1 == h4 or h1 == h5:
-                                                                print("El nombre ya existe, Pruebe con otro")
-                                                                print
-                                                            else:
-                                                                print("Cambiaste el nombre de esta habitación")
-                                                                print()
+                                                            compararNombres()
+                                                            if salirBlucle == 1:
+                                                                salirBlucle -= 1
                                                                 break
                                                         
                                                     elif eleccionHab == 3:
@@ -143,12 +154,9 @@ while True:
                                                         while True:
                                                             h2=input("Digite el nuevo nombre para esta Habitación: ")
                                                             print()
-                                                            if h2 == h1 or h2 == h3 or h2 == h4 or h2 == h5:
-                                                                print("El nombre ya existe, Pruebe con otro")
-                                                                print
-                                                            else:
-                                                                print("Cambiaste el nombre de esta habitación")
-                                                                print()
+                                                            compararNombres()
+                                                            if salirBlucle == 1:
+                                                                salirBlucle -= 1
                                                                 break
                                                         
                                                     elif eleccionHab == 3:
@@ -182,12 +190,9 @@ while True:
                                                         while True:
                                                             h3=input("Digite el nuevo nombre para esta Habitación: ")
                                                             print()
-                                                            if h3 == h2 or h3 == h1 or h3 == h4 or h3 == h5:
-                                                                print("El nombre ya existe, Pruebe con otro")
-                                                                print
-                                                            else:
-                                                                print("Cambiaste el nombre de esta habitación")
-                                                                print()
+                                                            compararNombres()
+                                                            if salirBlucle == 1:
+                                                                salirBlucle -= 1
                                                                 break
                                                         
                                                     elif eleccionHab == 3:
@@ -221,12 +226,9 @@ while True:
                                                         while True:
                                                             h4=input("Digite el nuevo nombre para esta Habitación: ")
                                                             print()
-                                                            if h4 == h2 or h4 == h3 or h4 == h1 or h4 == h5:
-                                                                print("El nombre ya existe, Pruebe con otro")
-                                                                print
-                                                            else:
-                                                                print("Cambiaste el nombre de esta habitación")
-                                                                print()
+                                                            compararNombres()
+                                                            if salirBlucle == 1:
+                                                                salirBlucle -= 1
                                                                 break
                                                         
                                                     elif eleccionHab == 3:
@@ -260,12 +262,9 @@ while True:
                                                         while True:
                                                             h5=input("Digite el nuevo nombre para esta Habitación: ")
                                                             print()
-                                                            if h5 == h2 or h5 == h3 or h5 == h4 or h5 == h1:
-                                                                print("El nombre ya existe, Pruebe con otro")
-                                                                print
-                                                            else:
-                                                                print("Cambiaste el nombre de esta habitación")
-                                                                print()
+                                                            compararNombres()
+                                                            if salirBlucle == 1:
+                                                                salirBlucle -= 1
                                                                 break
                                                         
                                                     elif eleccionHab == 3:
