@@ -1,331 +1,215 @@
-cerrarApp = 0
-salirBlucle = 0
-def compararNombres():
+usuarios = {}
+claves = {}
+habitaciones_usuarios = {}
+conteo_usuarios = 0
+usuActual = 0
+ingresoUsu = 0
+HabUsuario = 0
+cerraduras = {}
+estados = ["abierto", "cerrado"]
+
+def menuSmartHome():
+    print("==============================")
+    print("Bienvenido a SmartHome\n")
+    print("Menu de Opciones.\n1.Ingresar con usuario existente.\n2.Registrar nuevo usuario.\n3.Salir.\n")
+
+def menuUsuario(usu):
+    print("==============================")
+    print(f"Bienvenido a SmartHome {usuarios[usu]}\n") 
+    print("Menu de Opciones:\n\n1.Menu de Habitaciones.\n2.Cambiar contraseña del usuario.\n3.Cerraduras.\n4.Salir de este Usuario.\n") 
+
+def registrarUsuarios():
+    global conteo_usuarios
+    print()
+    usuarios[conteo_usuarios] = input("Ingrese el nombre del nuevo usuario: ")
+    claves[conteo_usuarios] = input("Ingrese una nueva contraseña para este usuario: ")
+    habitaciones_usuarios[conteo_usuarios] = {}
+    cerraduras[conteo_usuarios] = {}
+    conteo_usuarios += 1
+
+def imprimirUsuarios():
+    print()
+    for x in range(len(usuarios)):
+        print(f"{x+1}. {usuarios[x]}")
+
+def ingresarUsuario():
+    global usuActual
     while True:
-        if h1 == h2 or h1 == h3 or h1 == h4 or h1 == h5 or h2 == h3 or h2 == h4 or h2 == h5 or h3 == h4 or h3 == h5 or h4 == h5:
-            print("El nombre ya existe, Pruebe con otro")
-            print()
-            break
+        print("==============================\nUsuarios disponibles:")
+        imprimirUsuarios()
+        eleccion2 = int(input("\nDigite el usuario a ingresar: "))
+        usuActual = eleccion2-1
+        verifiContraUsua()
+        return usuActual
+
+def verifiContraUsua():
+    correo = ""
+    contraseña = ""
+    while usuarios[usuActual] != correo or claves[usuActual] != contraseña:
+        correo=input("\nDigite su Usuario: ")
+        contraseña=input("Digite su contraseña: ")
+        if correo == usuarios[usuActual] and contraseña == claves[usuActual]:
+            return
         else:
-            global salirBlucle
-            print("Cambiaste el nombre de la habitacion")
-            print()
-            salirBlucle += 1
-            break
-            
-#Estas Variables solo sirven para guardar datos
-h1 = "Habitación 1"
-Disp1h1 = "Dispositivo 1"
-Disp2h1 = "Dispositivo 2"
-Disp3h1 = "Dispositivo 3"
-Disp4h1 = "Dispositivo 4"
-h2 = "Habitación 2"
-Disp1h2 = "Dispositivo 1"
-Disp2h2 = "Dispositivo 2"
-Disp3h2 = "Dispositivo 3"
-Disp4h2 = "Dispositivo 4"
-h3 = "Habitación 3"
-Disp1h3 = "Dispositivo 1"
-Disp2h3 = "Dispositivo 2"
-Disp3h3 = "Dispositivo 3"
-Disp4h3 = "Dispositivo 4"
-h4 = "Habitación 4"
-Disp1h4 = "Dispositivo 1"
-Disp2h4 = "Dispositivo 2"
-Disp3h4 = "Dispositivo 3"
-Disp4h4 = "Dispositivo 4"
-h5 = "Habitación 5"
-Disp1h5 = "Dispositivo 1"
-Disp2h5 = "Dispositivo 2"
-Disp3h5 = "Dispositivo 3"
-Disp4h5 = "Dispositivo 4"
+            print("\nContraseña o Usuario incorrecto, Pruebe otra vez")
+
+def menuHabitaciones():
+    global HabUsuario
+    print("===============================")
+    print(f"Menu de habitaciones, De: {usuarios[usuActual]}\n")
+    if len(habitaciones_usuarios[usuActual]) >= 1:
+        imprimirHab()
+    else:
+        print("No has registrado Habitaciones")
+    print(f"\n1. Ingresar a habitación. \n2. Registrar nuevas habitaciones.\n3. Salir.\n")
+
+def imprimirHab():
+    for i in range(len(habitaciones_usuarios[usuActual])):
+        print(f"{i+1}. {habitaciones_usuarios[usuActual][i]}.")
+
+def registrarHab():
+    NewHab = input("Digite el nombre de la nueva habitación: ")
+    if NewHab not in habitaciones_usuarios[usuActual]:
+        habitaciones_usuarios[usuActual][len(habitaciones_usuarios[usuActual])] = NewHab
+    else:
+        print("La habitación ya existe.")
+
+def cambioContra():
+    a = ""
+    b = ""
+    c = claves[usuActual]
+    while b != claves[usuActual]:
+        claves[usuActual] = c
+        b = input("Digite su contraseña actual: ")
+        print()
+        if b == claves[usuActual]:
+            claves[usuActual] = input("Digite la nueva contraseña: ")
+            a = input("Vuelva a digitar la nueva contraseña: ")
+            if claves[usuActual] == a:
+                print("\nLa contraseña se cambió con éxito\n")
+                return claves[usuActual]
+            else:
+                print("\nLas contraseñas no coinciden, Pruebe de nuevo\n")
+        else:
+            print("Contraseña incorrecta, Pruebe otra vez\n")
+
+def menuCerraduras():
+    print("============================")
+    print("Menú de Cerraduras\n")
+    print("Cerraduras registradas:")
+    if cerraduras[usuActual]:
+        for cerradura, info in cerraduras[usuActual].items():
+            print(f"- {cerradura}: {info['estado']}")
+    else:
+        print("No hay cerraduras registradas.")
+    print("\nOpciones:\n1. Registrar cerradura.\n2. Cambiar estado de cerradura.\n3. Eliminar cerradura.\n4. Salir.")
+    eleccion = int(input("\nSeleccione una opción: "))
+    return eleccion
+
+def registarCerradura():
+    nombre = input("Ingrese el nombre de la nueva cerradura: ")
+    if nombre not in cerraduras[usuActual]:
+        clave = input("Digite una clave para esta cerradura: ")
+        cerraduras[usuActual][nombre] = {"estado": "Indefinido", "clave": clave}
+    else:
+        print("La cerradura ya existe.")
+
+def cambiarEstadoCerradura():
+    nombre = input("Ingrese el nombre de la cerradura: ")
+    if usuActual in cerraduras and nombre in cerraduras[usuActual]:
+        clave_cerradura = cerraduras[usuActual][nombre]["clave"]
+        codigo = input("Ingrese la clave de la cerradura: ")
+        if codigo == clave_cerradura:
+            if cerraduras[usuActual][nombre]["estado"] == "Indefinido":
+                nuevo_estado = input(f"Ingrese el nuevo estado ({'/'.join(estados)}): ").lower()
+                if nuevo_estado in estados:
+                    nuevo_estado = nuevo_estado.capitalize()
+                    cerraduras[usuActual][nombre]["estado"] = nuevo_estado
+                    print(f"Estado de la cerradura '{nombre}' cambiado a '{nuevo_estado}'.")
+                else:
+                    print("Estado no válido. Por favor, ingrese 'Abierto' o 'Cerrado'.")
+            elif cerraduras[usuActual][nombre]["estado"] == "Abierto":
+                cerraduras[usuActual][nombre]["estado"] = estados[1]
+                print(f"El estado de la cerradura {nombre} cambio a",estados[1])
+            elif cerraduras[usuActual][nombre]["estado"] == "cerrado":
+                cerraduras[usuActual][nombre]["estado"] = estados[0]
+                print(f"El estado de la cerradura {nombre} cambio a",estados[0])
+        else:
+            print("Contraseña Incorrecta.")
+    else:
+        print(f"No se encontró la cerradura '{nombre}' o el usuario no tiene cerraduras registradas.")
+
+def eliminarCerradura():
+    nombre = input("Ingrese el nombre de la cerradura a eliminar: ")
+    if nombre in cerraduras[usuActual]:
+        del cerraduras[usuActual][nombre]
+        print(f"Cerradura '{nombre}' ha sido eliminada.")
+    else:
+        print(f"No se encontró la cerradura '{nombre}'.")
 
 while True:
-    if cerrarApp == 1:
-        cerrarApp -=1
+    menuSmartHome()
+    eleccion1 = int(input("Digite su elección: "))
+    if eleccion1 == 1:
+        if conteo_usuarios >= 1:
+            usuActual = ingresarUsuario()
+            ingresoUsu = 1
+            if ingresoUsu == 1:
+                ingresoUsu -= 1
+                while True:
+                    menuUsuario(usuActual)
+                    eleccion3 = int(input("Digite su elección: "))
+                    if eleccion3 == 1:
+                        while True:
+                            menuHabitaciones()
+                            eleccion4 = int(input("Digite su elección: "))
+                            if eleccion4 == 1:
+                                imprimirHab()
+                                eleccion5 = int(input("Digite la habitacion a entrar: "))
+                                if eleccion5 >= len(habitaciones_usuarios[usuActual])+1:
+                                    print("Eleccion Invalida")
+                                else:
+                                    print("============================")
+                                    print("Menu de habitación:",habitaciones_usuarios[usuActual][eleccion5-1])                     
+                            
+                            elif eleccion4 == 2:
+                                registrarHab()
+        
+                            elif eleccion4 ==3:
+                                print("Salió del menú de habitaciones")
+                                break
+                            else:
+                                print("Elección Invalida")
+                    elif eleccion3 == 2:
+                        claves[usuActual] = cambioContra()
+                    elif eleccion3 == 3:
+                        while True:
+                            opcion_cerraduras = menuCerraduras()
+                            if opcion_cerraduras == 1:
+                                registarCerradura()
+                            elif opcion_cerraduras == 2:
+                                cambiarEstadoCerradura()
+                            elif opcion_cerraduras == 3:
+                                eliminarCerradura()
+                            elif opcion_cerraduras == 4:
+                                print("\nSalió del menú de cerraduras")
+                                break
+                            else:
+                                print("\nElección inválida.")
+                    elif eleccion3 == 4:
+                        print(f"Salió del usuario {usuarios[usuActual]}")
+                        break
+                    else:
+                        print("Opción inválida")
+            else:
+                print("No ingresó a ningún usuario.\n")
+        else:
+            print("\nNo hay usuarios registrados\n")
+    elif eleccion1 == 2:
+        registrarUsuarios()
+    elif eleccion1 == 3:
+        print("=====================================")
+        print("Gracias por ingresar a SmartHome.")
         break
     else:
-        print("=========================================")
-        print("Bienvenido a SmartHome")
-        print()
-        print("Menu de Opciones:")
-        print("1.Registrar nuevo usuario\n2.Salir")
-
-        selección=int(input("Digite su elección: "))
-        #Registrar Un Nuevo Usuario
-        if selección == 1:
-            print()
-            u1=input("Registre el nombre de Usuario: ")
-            clave=input("Registre una contraseña: ")
-            print()
-            print("Has registrado un nuevo usuario!")
-            print()
-            while True:
-                print("=========================================")
-                print("Bienvenido a SmartHome")
-                print()
-                print("Menu de Opciones:")
-                print("1.Ingresar con usuario existente\n2.Registrar nuevo usuario\n3.Salir")
-        
-                selección=int(input("Digite su elección: "))
-        
-                if selección == 1:           #Verificación de contraseña Usuario 1(u1)
-                    correo = 0
-                    contraseña = 0
-                    while u1 != correo or clave != contraseña:
-                        print()
-                        print(f"Usuarios disponibles:\n-{u1}")
-                        print()
-                        correo=input("Digite su Usuario: ")
-                        contraseña=input("Digite su contraseña: ")
-                        if correo == u1 and contraseña == clave:
-                            while True:
-                                print("=========================================") #Ingreso a app con Usuario 1(u1)
-                                print("Bienvenido",u1)
-                                print()
-                                print("Menu de opciones:")
-                                print("1.Menu de Habitaciones.\n2.Salir de este Usuario.")
-        
-                                elección=int(input("Digite su elección: "))
-                                print()
-                                if elección == 1: #Menu de Habitaciones
-                                    while True:
-                                        print("=========================================")
-                                        print("Menu de habitaciones")
-                                        print()
-                                        print(f"1.{h1}\n2.{h2}\n3.{h3}\n4.{h4}\n5.{h5}\n\n6.Salir del Menu de habitaciones")
-                                        print()
-                                        eleccion = int(input("Digite su elección:"))
-                                        print()
-
-                                        if eleccion == 1:
-                                                while True:
-                                                    print("Estás en",h1)
-                                                    print()
-                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h1}\n3.Salir de {h1}")
-                                                    print()
-                                                    eleccionHab = int(input("Digite su elección: "))
-                                                
-                                                    if eleccionHab == 1:
-                                                        while True:
-                                                            print("Menu de Dispositivos")
-                                                            print()
-                                                            print(f"1.{Disp1h1}\n2.{Disp2h1}\n3.{Disp3h1}\n4.{Disp4h1}\n5.Salir del menú de dispositivos")
-                                                            print()
-                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                    
-                                                    elif eleccionHab == 2:
-                                                        while True:
-                                                            h1=input("Digite el nuevo nombre para esta Habitación: ")
-                                                            print()
-                                                            compararNombres()
-                                                            if salirBlucle == 1:
-                                                                salirBlucle -= 1
-                                                                break
-                                                        
-                                                    elif eleccionHab == 3:
-                                                        print()
-                                                        print("Saliste de",h1)
-                                                        print()
-                                                        break
-                                                        
-                                                    else:
-                                                        print()
-                                                        print("Elección Invalida, Pruebe otra vez")
-                                                        print()
-
-                                        if eleccion == 2:
-                                            while True:
-                                                    print("Estás en",h2)
-                                                    print()
-                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h2}\n3.Salir de {h2}")
-                                                    print()
-                                                    eleccionHab = int(input("Digite su elección: "))
-                                                
-                                                    if eleccionHab == 1:
-                                                        while True:
-                                                            print("Menu de Dispositivos")
-                                                            print()
-                                                            print(f"1.{Disp1h2}\n2.{Disp2h2}\n3.{Disp3h2}\n4.{Disp4h2}\n5.Salir del menú de dispositivos")
-                                                            print()
-                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                    
-                                                    elif eleccionHab == 2:
-                                                        while True:
-                                                            h2=input("Digite el nuevo nombre para esta Habitación: ")
-                                                            print()
-                                                            compararNombres()
-                                                            if salirBlucle == 1:
-                                                                salirBlucle -= 1
-                                                                break
-                                                        
-                                                    elif eleccionHab == 3:
-                                                        print()
-                                                        print("Saliste de",h2)
-                                                        print()
-                                                        break
-                                                        
-                                                    else:
-                                                        print()
-                                                        print("Elección Invalida, Pruebe otra vez")
-                                                        print()
-                                               
-                                        if eleccion == 3:
-                                                while True:
-                                                    print("Estás en",h3)
-                                                    print()
-                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h3}\n3.Salir de {h3}")
-                                                    print()
-                                                    eleccionHab = int(input("Digite su elección: "))
-                                                
-                                                    if eleccionHab == 1:
-                                                        while True:
-                                                            print("Menu de Dispositivos")
-                                                            print()
-                                                            print(f"1.{Disp1h3}\n2.{Disp2h3}\n3.{Disp3h3}\n4.{Disp4h3}\n5.Salir del menú de dispositivos")
-                                                            print()
-                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                    
-                                                    elif eleccionHab == 2:
-                                                        while True:
-                                                            h3=input("Digite el nuevo nombre para esta Habitación: ")
-                                                            print()
-                                                            compararNombres()
-                                                            if salirBlucle == 1:
-                                                                salirBlucle -= 1
-                                                                break
-                                                        
-                                                    elif eleccionHab == 3:
-                                                        print()
-                                                        print("Saliste de",h3)
-                                                        print()
-                                                        break
-                                                        
-                                                    else:
-                                                        print()
-                                                        print("Elección Invalida, Pruebe otra vez")
-                                                        print()
-                                                        
-                                        if eleccion == 4:
-                                            while True:
-                                                    print("Estás en",h4)
-                                                    print()
-                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h4}\n3.Salir de {h4}")
-                                                    print()
-                                                    eleccionHab = int(input("Digite su elección: "))
-                                                
-                                                    if eleccionHab == 1:
-                                                        while True:
-                                                            print("Menu de Dispositivos")
-                                                            print()
-                                                            print(f"1.{Disp1h4}\n2.{Disp2h4}\n3.{Disp3h4}\n4.{Disp4h4}\n5.Salir del menú de dispositivos")
-                                                            print()
-                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                    
-                                                    elif eleccionHab == 2:
-                                                        while True:
-                                                            h4=input("Digite el nuevo nombre para esta Habitación: ")
-                                                            print()
-                                                            compararNombres()
-                                                            if salirBlucle == 1:
-                                                                salirBlucle -= 1
-                                                                break
-                                                        
-                                                    elif eleccionHab == 3:
-                                                        print()
-                                                        print("Saliste de",h4)
-                                                        print()
-                                                        break
-                                                        
-                                                    else:
-                                                        print()
-                                                        print("Elección Invalida, Pruebe otra vez")
-                                                        print()
-                                                        
-                                        if eleccion == 5:
-                                            while True:
-                                                    print("Estás en",h5)
-                                                    print()
-                                                    print(f"1.Menu de dispositivos\n2.Cambiar Nombre de {h5}\n3.Salir de {h5}")
-                                                    print()
-                                                    eleccionHab = int(input("Digite su elección: "))
-                                                
-                                                    if eleccionHab == 1:
-                                                        while True:
-                                                            print("Menu de Dispositivos")
-                                                            print()
-                                                            print(f"1.{Disp1h5}\n2.{Disp2h5}\n3.{Disp3h5}\n4.{Disp4h5}\n5.Salir del menú de dispositivos")
-                                                            print()
-                                                            break #Este break es solo para que no tire error, para continuar el código se elimina.
-                                                    
-                                                    elif eleccionHab == 2:
-                                                        while True:
-                                                            h5=input("Digite el nuevo nombre para esta Habitación: ")
-                                                            print()
-                                                            compararNombres()
-                                                            if salirBlucle == 1:
-                                                                salirBlucle -= 1
-                                                                break
-                                                        
-                                                    elif eleccionHab == 3:
-                                                        print()
-                                                        print("Saliste de",h5)
-                                                        print()
-                                                        break
-                                                        
-                                                    else:
-                                                        print()
-                                                        print("Elección Invalida, Pruebe otra vez")
-                                                        print()
-                                                        
-                                        elif eleccion == 6:
-                                            print()
-                                            print("Has salido de el Menu de Habitaciones")
-                                            print()
-                                            break
-
-            
-                                       
-                                elif elección == 2:
-                                    print()
-                                    print("Saliste del usuario",u1)
-                                    print()
-                                    break
-                                else:
-                                    print("Algo salio mal, intente otra vez")
-        
-                        
-                        else: #Aqui ya es fuera del Usuario 1 {1}
-                            print("Algo salio mal, intente otra vez")
-        
-                elif selección == 2:
-                    u2=input("Registre su correo email: ")
-                    clave2=input("Registre una contraseña: ")
-                    print()
-                    print("Has registrado un nuevo usuario!")
-                    print()
-                    print("Menu de Opciones:")
-                    print("1.Ingresar con usuario existente\n2.Registrar nuevo usuario\n3.Salir")
-                    cerrarApp += 1
-                    break
-        
-                elif selección == 3:
-                    print()
-                    print("Gracias por ingresar")
-                    cerrarApp += 1
-                    break
-        
-                else:
-                    print()
-                    print("Elección invalida, pruebe otra vez")
-                    print()
-        
-        elif selección == 2:
-            print()
-            print("Gracias por ingresar")
-            break
-            
-        else:
-            print()
-            print("Elección invalida, pruebe otra vez")
-            print()
+        print("Elección Invalida, Pruebe otra vez")
