@@ -2,17 +2,52 @@ usuarios = {}
 claves = {}
 habitaciones = {}
 dispositivos = {}
+cerraduras = {}
 contadorUsu = 0
 usuActual = 0
 ingresoUsu = 0
-HabUsuario = 0
-cerraduras = {}
 estados = ["abierto", "cerrado"]
 
-def menuSmartHome():
-    print("==============================")
-    print("Bienvenido a SmartHome\n")
-    print("Menu de Opciones.\n1.Ingresar con usuario existente.\n2.Registrar nuevo usuario.\n3.Salir.\n")
+def guardarDatos(usuarios,claves,habitaciones,dispositivos,cerraduras,contadorUsu):
+    datosUsuarios = open("Usuarios.txt","w")
+    datosUsuarios.write(str(usuarios))
+    datosUsuarios.close()
+    datosClaves = open("Claves.txt","w")
+    datosClaves.write(str(claves))
+    datosClaves.close()
+    datosHabitaciones = open("Habitaciones.txt","w")
+    datosHabitaciones.write(str(habitaciones))
+    datosHabitaciones.close()
+    datosDispositivos = open("Dispositivos.txt","w")
+    datosDispositivos.write(str(dispositivos))
+    datosDispositivos.close()
+    datosCerraduras = open("Cerraduras.txt","w")
+    datosCerraduras.write(str(cerraduras))
+    datosCerraduras.close()
+    datosContadorUsuario = open("ContadorUsuario.txt","w")
+    datosContadorUsuario.write(str(contadorUsu))
+    datosContadorUsuario.close()
+
+def cargarDatos(usuarios,claves,habitaciones,dispositivos,cerraduras,contadorUsu):
+    datosUsuarios = open("Usuarios.txt","r")
+    usuarios = eval(datosUsuarios.read())
+    datosUsuarios.close()
+    datosClaves = open("Claves.txt","r")
+    claves = eval(datosClaves.read())
+    datosClaves.close()
+    datosHabitaciones = open("Habitaciones.txt","r")
+    habitaciones = eval(datosHabitaciones.read())
+    datosHabitaciones.close()
+    datosDispositivos = open("Dispositivos.txt","r")
+    dispositivos = eval(datosDispositivos.read())
+    datosDispositivos.close()
+    datosCerraduras = open("Cerraduras.txt","r")
+    cerraduras = eval(datosCerraduras.read())
+    datosCerraduras.close()
+    datosContadorUsuario = open("ContadorUsuario.txt","r")
+    contadorUsu = int(datosContadorUsuario.read())
+    datosContadorUsuario.close()
+    return usuarios,claves,habitaciones,dispositivos,cerraduras,contadorUsu
 
 def menuUsuario(usu):
     print("==============================")
@@ -30,14 +65,13 @@ def registrarUsuarios():
     contadorUsu += 1
 
 def imprimirUsuarios():
-    print()
     for x in range(len(usuarios)):
         print(f"{x+1}. {usuarios[x]}")
 
 def ingresarUsuario():
     global usuActual
     while True:
-        print("==============================\nUsuarios disponibles:")
+        print("==============================\nUsuarios disponibles:\n")
         imprimirUsuarios()
         eleccion2 = int(input("\nDigite el usuario a ingresar: "))
         usuActual = eleccion2-1
@@ -56,7 +90,6 @@ def verifiContraUsua():
             print("\nContraseña o Usuario incorrecto, Pruebe otra vez")
 
 def menuHabitaciones():
-    global HabUsuario
     print("===============================")
     print(f"Menu de habitaciones, De: {usuarios[usuActual]}\n")
     if len(habitaciones[usuActual]) >= 1:
@@ -64,6 +97,17 @@ def menuHabitaciones():
     else:
         print("No has registrado Habitaciones")
     print(f"\n1. Ingresar a habitación. \n2. Registrar nuevas habitaciones.\n3. Salir.\n")
+
+def registrarHab():
+    NewHab = input("Digite el nombre de la nueva habitación: ")
+    if NewHab not in habitaciones[usuActual]:
+        habitaciones[usuActual][len(habitaciones[usuActual])] = {'nombre': NewHab, 'conteoDisp': 0}
+    else:
+        print("La habitación ya existe.")
+
+def imprimirHab():
+    for i, habitacion in habitaciones[usuActual].items():
+        print(f"{i+1}. {habitacion['nombre']}")
 
 def menuHabitacionActual():
     print("============================")
@@ -74,7 +118,7 @@ def menuHabitacionActual():
         print("No has registrado dispositivos.")
     print("\n1. Registrar Nuevo dispositivo.\n2. Ingresar a un dispositivo.\n3. Salir.")
 
-def registarDispocitivo():
+def registarDispositivo():
     print("============================")
     dispositivo = input("Ingrese el nombre del dispositivo a agregar: ")
     estadoDisp = int(input("1.Encendido.  2.Apagado. Seleccione (1/2): "))
@@ -85,34 +129,24 @@ def registarDispocitivo():
     habitacionActual = habitaciones[usuActual][eleccion5-1]['nombre']
     dispo1 = habitaciones[usuActual][eleccion5-1]['conteoDisp']
     dispositivos[(usuActual, habitacionActual, dispo1)] = {"NombreDisp": dispositivo, "EstadoDisp": estadoDisp}
-    print(f"Dispositivo '{dispositivo}' agregado a la habitación '{habitacionActual}'.")
+    print(f"\nDispositivo agregado a la habitación {habitacionActual}.")
     habitaciones[usuActual][eleccion5-1]['conteoDisp'] += 1
-
-def imprimirHab():
-    for i, habitacion in habitaciones[usuActual].items():
-        print(f"{i+1}. {habitacion['nombre']}")
 
 def imprimirDisp():
     habitacionActual = habitaciones[usuActual][eleccion5-1]['nombre']
     dispositivosHabitacion = [(key, disp) for key, disp in dispositivos.items() if key[0] == usuActual and key[1] == habitacionActual]
     if dispositivosHabitacion:
+        print(dispositivosHabitacion)
         for i, (_, dispositivo) in enumerate(dispositivosHabitacion):
             print(f"{i+1}. {dispositivo['NombreDisp']}: {dispositivo['EstadoDisp']}")
     else:
         print("No hay dispositivos registrados en esta habitación.")
 
-def menuDispocitivos():
+def menuDispositivos():
     print("============================")
     print("Menu del dispositivo:", dispositivos[(usuActual, habitaciones[usuActual][eleccion5-1]['nombre'], eleccion7-1)]["NombreDisp"])
     print("Estado:", dispositivos[(usuActual, habitaciones[usuActual][eleccion5-1]['nombre'], eleccion7-1)]["EstadoDisp"])
     print("\n1.Cambiar estado del dispositivo.\n2.Salir.")
-
-def registrarHab():
-    NewHab = input("Digite el nombre de la nueva habitación: ")
-    if NewHab not in habitaciones[usuActual]:
-        habitaciones[usuActual][len(habitaciones[usuActual])] = {'nombre': NewHab, 'conteoDisp': 0}
-    else:
-        print("La habitación ya existe.")
 
 def cambiarEstadoDisp():
     dispositi = (usuActual, habitaciones[usuActual][eleccion5-1]["nombre"], eleccion7-1)
@@ -155,8 +189,8 @@ def menuCerraduras():
     else:
         print("No hay cerraduras registradas.")
     print("\nMenu de opciones.\n1. Registrar cerradura.\n2. Cambiar estado de cerradura.\n3. Eliminar cerradura.\n4. Salir.")
-    eleccion = int(input("\nSeleccione una opción: "))
-    return eleccion
+    eleccion9 = int(input("\nSeleccione una opción: "))
+    return eleccion9
 
 def registarCerradura():
     print("============================")
@@ -179,9 +213,9 @@ def cambiarEstadoCerradura():
                 if nuevoEstado in estados:
                     nuevoEstado = nuevoEstado.capitalize()
                     cerraduras[usuActual][nombre]["estado"] = nuevoEstado
-                    print(f"\nEstado de la cerradura '{nombre}' cambiado a '{nuevoEstado}'.")
+                    print(f"\nEstado de la cerradura {nombre} cambiado a {nuevoEstado}.")
                 else:
-                    print("Estado no válido. Por favor, ingrese 'Abierto' o 'Cerrado'.")
+                    print("Estado Invalido. Por favor, ingrese Abierto o Cerrado.")
             elif cerraduras[usuActual][nombre]["estado"] == "Abierto":
                 cerraduras[usuActual][nombre]["estado"] = estados[1]
                 print(f"El estado de la cerradura {nombre} cambio a",estados[1])
@@ -191,7 +225,7 @@ def cambiarEstadoCerradura():
         else:
             print("Contraseña Incorrecta.")
     else:
-        print(f"No se encontró la cerradura '{nombre}' o el usuario no tiene cerraduras registradas.")
+        print(f"No se encontró la cerradura {nombre}, o el usuario no tiene cerraduras registradas.")
 
 def eliminarCerradura():
     print("============================")
@@ -202,8 +236,15 @@ def eliminarCerradura():
     else:
         print(f"No se encontró la cerradura '{nombre}'.")
 
+try:
+    usuarios, claves, habitaciones, dispositivos, cerraduras, contadorUsu = cargarDatos(usuarios,claves,habitaciones,dispositivos,cerraduras,contadorUsu)
+    print("Has cargado los datos correctamente")
+except:
+    print("No hay datos que cargar.")
 while True:
-    menuSmartHome()
+    print("==============================")
+    print("Bienvenido a SmartHome\n")
+    print("Menu de Opciones.\n1.Ingresar con usuario existente.\n2.Registrar nuevo usuario.\n3.Guardar y Salir.\n")
     eleccion1 = int(input("Digite su elección: "))
     if eleccion1 == 1:
         if contadorUsu >= 1:
@@ -228,7 +269,7 @@ while True:
                                         menuHabitacionActual()
                                         eleccion6 = int(input("Digite su elección: "))
                                         if eleccion6 == 1:
-                                            registarDispocitivo()
+                                            registarDispositivo()
                                         elif eleccion6 == 2:
                                             print("============================")
                                             imprimirDisp()
@@ -237,7 +278,7 @@ while True:
                                                 print("Dispositivo Inexistente")
                                             else:
                                                 while True:
-                                                    menuDispocitivos()
+                                                    menuDispositivos()
                                                     eleccion8 = int(input("Digite su elección: "))
                                                     if eleccion8 == 1:
                                                         cambiarEstadoDisp()
@@ -262,14 +303,14 @@ while True:
                         claves[usuActual] = cambioContra()
                     elif eleccion3 == 3:
                         while True:
-                            opcion_cerraduras = menuCerraduras()
-                            if opcion_cerraduras == 1:
+                            eleccion9 = menuCerraduras()
+                            if eleccion9 == 1:
                                 registarCerradura()
-                            elif opcion_cerraduras == 2:
+                            elif eleccion9 == 2:
                                 cambiarEstadoCerradura()
-                            elif opcion_cerraduras == 3:
+                            elif eleccion9 == 3:
                                 eliminarCerradura()
-                            elif opcion_cerraduras == 4:
+                            elif eleccion9 == 4:
                                 print("\nSalió del menú de cerraduras")
                                 break
                             else:
@@ -287,7 +328,8 @@ while True:
         registrarUsuarios()
     elif eleccion1 == 3:
         print("=====================================")
-        print("Gracias por ingresar a SmartHome.")
+        guardarDatos(usuarios,claves,habitaciones,dispositivos,cerraduras,contadorUsu)
+        print("Los datos se guardaron correctamente.\nGracias por ingresar a SmartHome.")
         break
     else:
         print("\nElección Invalida, Pruebe otra vez")
